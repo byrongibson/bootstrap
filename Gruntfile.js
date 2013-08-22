@@ -61,11 +61,20 @@ module.exports = function(grunt) {
 
     uglify: {
       options: {
-        banner: '<%= banner %>'
+        //banner: '<%= banner %>',
+        stripBanners: true
       },
       bootstrap: {
         src: ['<%= concat.bootstrap.dest %>'],
         dest: 'dist/js/<%= pkg.name %>.min.js'
+      },
+      main: {
+        src: ['js/main.js'],
+        dest: 'dist/js/main.min.js'
+      },
+      plugins: {
+        src: ['js/plugins.js'],
+        dest: 'dist/js/plugins.min.js'
       }
     },
 
@@ -94,7 +103,18 @@ module.exports = function(grunt) {
         },
         src: ['less/theme.less'],
         dest: 'dist/css/<%= pkg.name %>-theme.min.css'
-      }
+      },
+      main: {
+        src: ['less/main.less'],
+        dest: 'dist/css/main.css'
+      },
+      main_min: {
+        options: {
+          compress: true
+        },
+        src: ['less/main.less'],
+        dest: 'dist/css/main.min.css'
+      }    
     },
 
     copy: {
@@ -102,6 +122,18 @@ module.exports = function(grunt) {
         expand: true,
         src: ["fonts/*"],
         dest: 'dist/'
+      },
+      lift: {
+        files: [
+          {expand: true, flatten: true, src: ['assets/js/html5shiv.js'], dest: '../../src/main/webapp/scripts/vendor/',},
+          {expand: true, flatten: true, src: ['assets/js/respond.min.js'], dest: '../../src/main/webapp/scripts/vendor/',},
+          {expand: true, flatten: true, src: ['dist/js/bootstrap.min.js'], dest: '../../src/main/webapp/scripts/',},
+          {expand: true, flatten: true, src: ['dist/js/main.min.js'], dest: '../../src/main/webapp/scripts/',},
+          {expand: true, flatten: true, src: ['dist/js/plugins.min.js'], dest: '../../src/main/webapp/scripts/',},
+          {expand: true, flatten: true, src: ['dist/css/bootstrap.min.css'], dest: '../../src/main/webapp/styles/',},
+          {expand: true, flatten: true, src: ['dist/css/main.min.css'], dest: '../../src/main/webapp/styles/',},
+          {expand: true, flatten: true, src: ['dist/fonts/*'], dest: '../../src/main/webapp/fonts/',}
+        ]
       }
     },
 
@@ -169,7 +201,7 @@ module.exports = function(grunt) {
   grunt.registerTask('validate-html', ['jekyll', 'validation']);
 
   // Test task.
-  var testSubtasks = ['dist-css', 'jshint', 'qunit'];
+  var testSubtasks = ['dist-css', 'jshint', 'qunit', 'validate-html'];
   // Only run BrowserStack tests under Travis
   if (process.env.TRAVIS) {
     // Only run BrowserStack tests if this is a mainline commit in twbs/bootstrap, or you have your own BrowserStack key
@@ -189,7 +221,7 @@ module.exports = function(grunt) {
   grunt.registerTask('dist-fonts', ['copy']);
 
   // Full distribution task.
-  grunt.registerTask('dist', ['clean', 'dist-css', 'dist-fonts', 'dist-js']);
+  grunt.registerTask('dist', ['clean', 'dist-css', 'dist-js', 'dist-fonts']);
 
   // Default task.
   grunt.registerTask('default', ['test', 'dist', 'build-customizer']);
@@ -211,7 +243,7 @@ module.exports = function(grunt) {
     }
 
     var customize = fs.readFileSync('customize.html', 'utf-8')
-    var files = '<!-- generated -->\n<script id="files">\n' + getFiles('js') + getFiles('less') + getFiles('fonts') + '<\/script>\n<!-- /generated -->'
-    fs.writeFileSync('customize.html', customize.replace(/<!-- generated -->(.|[\n\r])*<!-- \/generated -->/, '') + files)
+    var files = getFiles('js') + getFiles('less') + getFiles('fonts')
+    fs.writeFileSync('assets/js/raw-files.js', files)
   });
 };
