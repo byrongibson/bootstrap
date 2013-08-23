@@ -1,0 +1,11 @@
+
+
+
+  , "devDependencies": {
+    , { "//": ["grunt-contrib-htmlmin": "~0.1.3"] }
+    , { "//": ["grunt-html": "git://github.com/jzaefferer/grunt-html.git"] }
+    , { "//": ["grunt-html-minify": "git://github.com/yize/grunt-html-minify.git"] }
+    , { "//": ["grunt-hashres": "git@github.com:Luismahou/grunt-hashres.git"] }
+    , { "//": ["grunt-htmlcompressor": "git://github.com/jney/grunt-htmlcompressor.git"] }
+    , { "//": ["grunt-processhtml": "git://github.com/dciccale/grunt-processhtml.git"] }
+  }

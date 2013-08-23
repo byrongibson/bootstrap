@@ -196,6 +196,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-jekyll');
   grunt.loadNpmTasks('grunt-recess');
   grunt.loadNpmTasks('browserstack-runner');
+/*grunt.loadNpmTasks('grunt-htmlcompressor');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-html');
+  grunt.loadNpmTasks('grunt-html-minify');
+  grunt.loadNpmTasks('grunt-hashres');
+  grunt.loadNpmTasks('grunt-htmlcompressor');
+  grunt.loadNpmTasks('grunt-processhtml');*/
 
   // Docs HTML validation task
   grunt.registerTask('validate-html', ['jekyll', 'validation']);
