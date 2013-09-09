@@ -68,6 +68,14 @@ module.exports = function(grunt) {
       bootstrap: {
         src: ['<%= concat.bootstrap.dest %>'],
         dest: 'dist/js/<%= pkg.name %>.min.js'
+      },
+      main: {
+        src: ['js/main.js'],
+        dest: 'dist/js/main.min.js'
+      },
+      plugins: {
+        src: ['js/plugins.js'],
+        dest: 'dist/js/plugins.min.js'
       }
     },
 
@@ -96,7 +104,29 @@ module.exports = function(grunt) {
         },
         src: ['less/theme.less'],
         dest: 'dist/css/<%= pkg.name %>-theme.min.css'
-      }
+      },
+      main: {
+        src: ['less/main.less'],
+        dest: 'dist/css/main.css'
+      },
+      main_min: {
+        options: {
+          compress: true
+        },
+        src: ['less/main.less'],
+        dest: 'dist/css/main.min.css'
+      },
+      custom: {
+        src: ['less/custom.less'],
+        dest: 'dist/css/custom.css'
+      },
+      custom_min: {
+        options: {
+          compress: true
+        },
+        src: ['less/custom.less'],
+        dest: 'dist/css/custom.min.css'
+      },
     },
 
     copy: {
@@ -104,6 +134,19 @@ module.exports = function(grunt) {
         expand: true,
         src: ["fonts/*"],
         dest: 'dist/'
+      },
+      lift: {
+        files: [
+          {expand: true, flatten: true, src: ["assets/js/html5shiv.js"], dest: '../../src/main/webapp/scripts/vendor/'},
+          {expand: true, flatten: true, src: ["assets/js/respond.min.js"], dest: '../../src/main/webapp/scripts/vendor/'},
+          {expand: true, flatten: true, src: ["dist/js/bootstrap.min.js"], dest: '../../src/main/webapp/scripts/vendor/'},
+          {expand: true, flatten: true, src: ["dist/js/main.min.js"], dest: '../../src/main/webapp/scripts/'},
+          {expand: true, flatten: true, src: ["dist/js/plugins.min.js"], dest: '../../src/main/webapp/scripts/'},
+          {expand: true, flatten: true, src: ["dist/css/bootstrap.min.css"], dest: '../../src/main/webapp/styles/'},
+          {expand: true, flatten: true, src: ["dist/css/main.min.css"], dest: '../../src/main/webapp/styles/'},
+          {expand: true, flatten: true, src: ["dist/css/custom.min.css"], dest: '../../src/main/webapp/styles/'},
+          {expand: true, flatten: true, src: ["dist/fonts/*"], dest: '../../src/main/webapp/fonts/'}
+        ]
       }
     },
 
@@ -191,7 +234,7 @@ module.exports = function(grunt) {
   grunt.registerTask('dist-fonts', ['copy']);
 
   // Full distribution task.
-  grunt.registerTask('dist', ['clean', 'dist-css', 'dist-fonts', 'dist-js']);
+  grunt.registerTask('dist', ['clean', 'dist-css', 'dist-js', 'dist-fonts']);
 
   // Default task.
   grunt.registerTask('default', ['test', 'dist', 'build-customizer']);
