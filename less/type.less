@@ -15,7 +15,7 @@ p {
   font-weight: 200;
   line-height: 1.4;
 
-  @media (min-width: @screen-sm) {
+  @media (min-width: @screen-sm-min) {
     font-size: (@font-size-base * 1.5);
   }
 }
@@ -255,8 +255,6 @@ blockquote {
 }
 
 // Quotes
-q:before,
-q:after,
 blockquote:before,
 blockquote:after {
   content: "";
@@ -264,7 +262,6 @@ blockquote:after {
 
 // Addresses
 address {
-  display: block;
   margin-bottom: @line-height-computed;
   font-style: normal;
   line-height: @line-height-base;
