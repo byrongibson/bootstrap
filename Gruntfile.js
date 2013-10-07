@@ -54,7 +54,7 @@ module.exports = function(grunt) {
           'js/tooltip.js',
           'js/popover.js',
           'js/scrollspy.js',
-          'js/tab.js',
+          'js/tab.js'],
         dest: 'dist/js/<%= pkg.name %>.js'
       }
     },
@@ -62,7 +62,7 @@ module.exports = function(grunt) {
     uglify: {
       options: {
         //banner: '<%= banner %>',
-        stripBanners: true
+        stripBanners: true,
         report: 'min'
       },
       bootstrap: {
