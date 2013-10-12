@@ -384,8 +384,16 @@ p {
 }
 
 .lead {
+<<<<<<< HEAD
   margin-bottom: 28px;
   font-size: 23px;
+||||||| merged common ancestors
+  margin-bottom: 20px;
+  font-size: 16.099999999999998px;
+=======
+  margin-bottom: 20px;
+  font-size: 16px;
+>>>>>>> dcef0a78d5151b492f1acc93656c6df5f6201c51
   font-weight: 200;
   line-height: 1.4;
 }
@@ -5724,12 +5732,6 @@ button.close {
 
 .modal-open {
   overflow: hidden;
-}
-
-body.modal-open,
-.modal-open .navbar-fixed-top,
-.modal-open .navbar-fixed-bottom {
-  margin-right: 15px;
 }
 
 .modal {
